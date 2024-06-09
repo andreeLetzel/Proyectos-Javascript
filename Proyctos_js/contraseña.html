@@ -1,0 +1,168 @@
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <title>Document</title>
+    <style>
+        .contra {
+            transform: scale();
+        }
+    </style>
+</head>
+<body>
+    <div class="contra">
+        <input type="text" placeholder="Ingrese su contraseña" name="pass" id="pass" spellcheck="false">
+        <div class="check">
+            <span>Contiene al menos 10 caracteres <i class="uil uil-times-circle"></i></span><br>
+            <span>Contiene al menos una mayuscula <i class="uil uil-times-circle"></i></span><br>
+            <span>Contiene al menos un número <i class="uil uil-times-circle"></i></span><br>
+            <span>Contiene al menos un caracter especial como $ # " & / : ; <i class="uil uil-times-circle"></i></span>
+        </div>
+    </div>
+    
+    <script>
+        const passInput = document.querySelector("#pass"),
+        iconos = document.querySelectorAll(".uil-times-circle");
+
+        console.log(iconos);
+
+        passInput.addEventListener("keyup", () => {
+            if (passInput.value === "") {
+                return iconos.forEach(i => {
+                    i.classList.replace("uil-check-circle", "uil-times-circle");
+                });
+            }
+            
+            if (passInput.value.length > 9) {
+                console.log("Mayor a 10");
+                iconos[0].classList.replace("uil-times-circle", "uil-check-circle");
+            } else {
+                iconos[0].classList.replace("uil-check-circle", "uil-times-circle");
+            }
+
+            if (mayus(passInput.value)) {
+                iconos[1].classList.replace("uil-times-circle", "uil-check-circle");
+            } else {
+                iconos[1].classList.replace("uil-check-circle", "uil-times-circle");
+            }
+
+            if (num(passInput.value)) {
+                iconos[2].classList.replace("uil-times-circle", "uil-check-circle");
+            } else {
+                iconos[2].classList.replace("uil-check-circle", "uil-times-circle");
+            }
+
+            if (char(passInput.value)) {
+                iconos[3].classList.replace("uil-times-circle", "uil-check-circle");
+            } else {
+                iconos[3].classList.replace("uil-check-circle", "uil-times-circle");
+            }
+        });
+
+        function mayus(str) {
+            if (str === null || str === "") return;
+            let cad = str.split(""), bool = false;
+            
+            /*cad.forEach(i => {
+                if (esLetra(i)) {
+                    if (i == i.toUpperCase()) {
+                        console.log("es Mayus");
+                        bool = true;
+                    }
+                }
+            });*/
+
+            if (new RegExp("[A-Z]","g").test(str)) bool = true;
+
+            console.log(bool);
+
+            return bool;
+
+            /*function esLetra (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return (ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58);
+            }*/
+        }
+
+        function num(str) {
+            if (str === null || str === "") return;
+            let cad = str.split(""), bool = false;
+
+            /*cad.forEach(i => {
+                if (esNum(i)) { 
+                    console.log("es numero");
+                    bool = true;
+                }
+            });*/
+
+            if (new RegExp("[0-9]","g").test(str)) bool = true;
+            console.log(bool);
+            return bool;
+
+            /*function esNum (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return  (ascii > 47 && ascii < 58);
+            }*/
+        
+        }
+
+        function char(str) {
+            if (str === null || str === "") return;
+            let cad = str.split(""), bool = false;
+
+            cad.forEach(i => {
+                if (!esLetra(i)) {
+                    bool = true;
+                }
+            });
+            
+            if (bool) return 1;
+            else return 0;
+
+            function esLetra (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return (ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58);
+            }
+        }
+
+        function contra(str) {
+            if (str === null || str === "") return;
+            let cad = str.split("");
+
+            cad.forEach(i => {
+                if (esLetra(i)) {
+                    if (i == i.toUpperCase()) {
+                        console.log("es Mayus");
+                        obj["mayus"] = true;
+                        obj["minus"] = false;
+                    } else if (i == i.toLowerCase()) {
+                        console.log("es Minus");
+                        obj["mayus"] = true;
+                        obj["minus"] = true;
+                    }
+                } else if (esNum(i)) { 
+                    console.log("es numero");
+                } else {
+                    console.log("no es letra");
+                }
+            });
+            
+            return;
+
+            function esLetra (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return (ascii > 64 && ascii < 91) /*|| (ascii > 47 && ascii < 58)*/;
+            }
+            function esNum (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return  (ascii > 47 && ascii < 58);
+            }
+            //esMayus = char => return char === char.toUpperCase;
+            //esMinus = char => return char === char.toLowerCase;
+        }
+    </script>
+</body>
+</html>

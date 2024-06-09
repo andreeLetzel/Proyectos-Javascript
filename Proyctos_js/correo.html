@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+
+    </div><br>
+    <button onclick="window.location = '1.html'">Reiniciar</button>
+
+    <script>
+        function correo(str) {
+            if (str === null || str == "") return;
+            if (str.indexOf("@") == str.lastIndexOf("@") && str.indexOf("@") > 0 && str.lastIndexOf(".") > (str.indexOf("@") + 1)  && str.indexOf("@") < str.length && str.indexOf("@") > 2 && str.indexOf("@") < (str.length - 2) && (esLetra(str.charAt(str.indexOf("@")+1)) && esLetra(str.charAt(str.indexOf("@")-1))) ) {
+                document.getElementById("container").innerHTML += "Correo valido<br>";
+                console.log("Correo valido");
+            } else {
+                document.getElementById("container").innerHTML += "Correo invaildo<br>";
+                console.log("Correo invalido");
+            }
+            function esLetra (char) {
+                let ascii = char.toUpperCase().charCodeAt(0);
+                return (ascii > 64 && ascii < 91) || (ascii > 47 && ascii < 58);
+            };
+        }
+
+        
+
+        correo(prompt("Ingrese su correo"));
+
+        /*correo("letzel");
+        correo("@gmail.com");
+        correo("a@a.com");
+        correo("123@.com");
+        correo("123@a.com");
+        correo("letzel.her.tellez@gmail.com");*/
+    </script>
+</body>
+</html>

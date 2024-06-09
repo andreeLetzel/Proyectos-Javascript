@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <h2><b>Introduzca la expresión y los indicadores:</b></h2>
+        <br>
+        <input type="text" name="regex" id="regex">
+        <select name="modif" id="modif">
+            <option value="" selected>Ningino</option>
+            <option value="i">i</option>
+            <option value="g">g</option>
+            <option value="ig">ig</option>
+        </select>
+        <br>
+        <h2><b>Introduzca la cadena para comprobar:</b></h2>
+        <br>
+        <input type="text" name="str" id="str">
+        <input type="button" value="Comparar" onclick="comprobar()">
+    </form>
+    <script>
+        let modif = document.getElementById("modif");
+        let selected = "";
+
+        modif.addEventListener('change',
+        function() {
+            selected = modif.options[modif.selectedIndex];
+        });
+        function comprobar() {
+            const regex = document.querySelector("#regex").value,
+            str = document.querySelector("#str").value;
+
+            if (new RegExp(regex, selected.value).test(str)) alert("coincide");
+            else alert("no coincide");
+        }
+    </script>
+</body>
+</html>

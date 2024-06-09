@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curp</title>
+</head>
+<body>
+    <div class="input">
+        <input type="text" class="curp" name="curp" placeholder="Ingresa su curp" oninput="XD()"><br>
+    </div>
+    <div class="error"></div>
+
+    <script>
+        const curpInput = document.querySelector(".curp"),
+        curp = document.querySelector(".curp1"),
+        error = document.querySelector(".error");
+        
+        const regex = [
+            /[A-Z]$/i,
+            /\d$/,
+            /(0[1-9]|1[0-2])$/,
+            /(?:0[1-9]|[12]\d|3[01])$/,
+            /[HM]$/i,
+            /(?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)$/i,
+            /[B-DF-HJ-NP-TV-Z]$/i,
+            /[A-Z\d]{2}$/
+        ];
+
+        /*curpInput.addEventListener("oninput",*/
+        
+        function XD (){
+            let cur = curpInput.value.length;
+            curpInput.value = curpInput.value.toUpperCase();
+            switch (true) {
+                case (cur == 0):
+                    break;
+
+                case (cur == 2): if (!/[AEIOUX]$/i.test(curpInput.value)) curpInput.value = curpInput.value.replace(/[^AEIOUX]$/, '');
+                    console.log(/[AEIOUX]$/i.test(curpInput.value), curpInput.value);
+                    break;
+
+                case (cur <= 4): if (!regex[0].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\d]$/, '');
+                    console.log(regex[0].test(curpInput.value), curpInput.value, regex[0]);
+                    break;
+                    
+                case (cur <= 6): if (!regex[1].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\D]$/, '');
+                    console.log(regex[1].test(curpInput.value), curpInput.value);
+                    break;
+                case (cur == 7): if (!/[0-1]$/.test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\d\D]$/, '');
+                    console.log(/[0-1]$/.test(curpInput.value), curpInput.value);
+                    break;
+                case (cur == 8): if (!regex[2].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\d\D]$/, '');
+                    console.log(regex[2].test(curpInput.value), curpInput.value);
+                    break;
+                case (cur == 9): if (!/[0-3]$/.test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\d\D]$/, '');
+                    console.log(/[0-3]$/.test(curpInput.value), curpInput.value);
+                    break;
+                case (cur == 10): if (!regex[3].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\d\D]$/, '');
+                    console.log(regex[3].test(curpInput.value), curpInput.value);
+                    break;
+                case (cur <= 10): if (!/[\d]$/.test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\w]$/i, '');
+                    console.log(/[\d]$/.test(curpInput.value), curpInput.value, "10");
+                    break;
+
+                case (cur == 11 ): if (!regex[4].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[^hm]$/i, '');
+                    console.log(regex[4].test(curpInput.value), curpInput.value);
+                    break;
+
+                case (cur == 13):if (!regex[5].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[\w\W][\w\W]$/i, '');
+                    console.log(regex[5].test(curpInput.value), curpInput.value);
+                    break;
+
+                case (cur >= 14 && cur <= 16):if (!regex[6].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[^B-DF-HJ-NP-TV-Z]$/i, '');
+                    console.log(regex[6].test(curpInput.value), curpInput.value);
+                    break;
+
+                case (cur >= 17 && cur == 18):if (!regex[7].test(curpInput.value)) curpInput.value = curpInput.value.replace(/[^A-Z\d]{2}$/i, '');
+                    console.log(regex[6].test(curpInput.value), curpInput.value);
+                    break;
+
+                default: break;
+            }
+            /*if (curpInput.value.length <= 4) curpInput.value = curpInput.value.replace(/[\d]$/, '');
+            else if (curpInput.value.length <= 10) {
+                if (curpInput.value.length <= 8) curpInput.value = curpInput.value.replace(/(?:[^0][^1-9]|[^1][^0-2])$/, '');
+                //else if (curpInput.value.length <= 8) curpInput.value = curpInput.value.replace(/([^])$/, '');
+            }
+            else if (curpInput.value.length <= 16) curpInput.value = curpInput.value.replace(/[\d]$/, '');
+            else if (curpInput.value.length <= 18) curpInput.value = curpInput.value.replace(/[a-zA-Z]$/, '');
+            else curpInput.value = curpInput.value.replace(/[a-zA-Z]$/, '');*/
+        }//);
+    </script>
+</body>
+</html>
